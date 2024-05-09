@@ -8,6 +8,7 @@ function GameObject(position, scale, color) {
         scale: scale,
         color: color,
         solid: true,
+        img: new Image(),
         onUpdate: deltaTime => { },
         onCollision: other => { },
         g: 0.004,
@@ -19,13 +20,14 @@ function GameObject(position, scale, color) {
 }
 
 function Player(position) {
-    let player = GameObject(position, Vector2D(50, 50), "blue");
+    let player = GameObject(position, Vector2D(50, 100), "blue");
     player.walkSpeed = 0.1;
     player.jumpSpeed = 1.2;
     player.maxJumpTime = 1000;
     player.jumpTime = 0;
     player.startJumpG = player.g;
     player.endJumpG = player.g * 2;
+    player.img.src = "resources/girl_9.png";
     player.onUpdate = deltaTime => {
         if (player.grounded) {
             player.jumpTime = 0;
@@ -64,6 +66,13 @@ function Block(position, scale) {
     return block;
 }
 
+function Balka(position, scale) {
+    let block = GameObject(position, scale, "red");
+    block.img.src = "resources/metal_branch.png";
+    block.g = 0;
+    return block;
+}
+
 function Camera() {
     let camera = GameObject(copyVector(player.position), Vector2D(0, 0));
     camera.g = 0;
@@ -90,7 +99,7 @@ function Enemy(position) {
         enemy.time += deltaTime;
         if (enemy.time >= enemy.maxWalkTime) {
             enemy.time = 0;
-            //enemy.walkSpeed *= -1;
+            enemy.walkSpeed *= -1;
         }
     }
     return enemy;
