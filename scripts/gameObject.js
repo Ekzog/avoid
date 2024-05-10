@@ -3,7 +3,10 @@ var currentId = 0;
 function GameObject(position, scale, color) {
     let gameObject = {
         id: currentId,
+        name: "object",
         position: position,
+        texture_position: Vector2D(scale.x, scale.y),
+        texture_size: Vector2D(scale.x, scale.y),
         velocity: Vector2D(0, 0),
         scale: scale,
         color: color,
@@ -20,24 +23,35 @@ function GameObject(position, scale, color) {
 }
 
 function Player(position) {
-    let player = GameObject(position, Vector2D(50, 100), "blue");
+    let player = GameObject(position, Vector2D(100, 150), "blue");
     player.walkSpeed = 0.1;
     player.jumpSpeed = 1.2;
     player.maxJumpTime = 1000;
     player.jumpTime = 0;
     player.startJumpG = player.g;
     player.endJumpG = player.g * 2;
-    player.img.src = "resources/girl_9.png";
+    player.name = "girl";
+    player.texture_size = Vector2D(256, 256);
+    //player.img.src = "resources/girl/girl_7.png";
     player.onUpdate = deltaTime => {
         if (player.grounded) {
             player.jumpTime = 0;
             player.g = player.startJumpG;
+            //player.scale = Vector2D(80, 150);
+            player.texture_position = Vector2D(75, 70);
+            player.img.src = "resources/girl/girl_7.png";
         }
         player.velocity.x = 0;
         if (controls.left.pressed) {
+            player.texture_position = Vector2D(100, 60);
+            player.img.src = "resources/girl/girl_9.png";
+           
             player.velocity.x -= player.walkSpeed;
         }
         if (controls.right.pressed) {
+            //player.scale = Vector2D(100, 150);
+            player.texture_position = Vector2D(100, 60);
+            player.img.src = "resources/girl/girl_9.png";
             player.velocity.x += player.walkSpeed;
         }
         if (controls.up.pressed && player.jumpTime < player.maxJumpTime) {
@@ -68,6 +82,8 @@ function Block(position, scale) {
 
 function Balka(position, scale) {
     let block = GameObject(position, scale, "red");
+    block.texture_size = Vector2D(100, 100);
+    block.texture_position = Vector2D(0, 0);
     block.img.src = "resources/metal_branch.png";
     block.g = 0;
     return block;

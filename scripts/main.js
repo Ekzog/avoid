@@ -24,8 +24,13 @@ function drawGameObject(gameObject) {
     gameContext.fillRect(positionOnScreen.x, positionOnScreen.y,
     gameObject.scale.x, gameObject.scale.y);
     
-    gameContext.drawImage(gameObject.img, positionOnScreen.x, positionOnScreen.y,
-    gameObject.scale.x, gameObject.scale.y)
+
+    gameContext.drawImage(gameObject.img, positionOnScreen.x - gameObject.texture_position.x, positionOnScreen.y - gameObject.texture_position.y, gameObject.texture_size.x, gameObject.texture_size.y);
+    /*
+    else{
+        gameContext.drawImage(gameObject.img, positionOnScreen.x - 25, positionOnScreen.y - 25, 50, 50);
+    }
+    */
 }
 
 function drawGameScreen() {
@@ -45,8 +50,8 @@ window.addEventListener('load', () => {
            [1, 1, 1],];
     for (let i = 0; i< map.length; i +=1) {
         for (let j = 0; j< map[i].length; j +=1){
-            if (map[i][j] == 1)  Balka(Vector2D(j * 50, i * 50), Vector2D(50, 50));
-            if (map[i][j] == 2)  player = Player(Vector2D(j * 50, i * 50));
+            if (map[i][j] == 1)  Balka(Vector2D(j * 100, i * 100), Vector2D(100, 100));
+            if (map[i][j] == 2)  player = Player(Vector2D(j * 100, i * 100));
         }
     }
     camera = Camera();
