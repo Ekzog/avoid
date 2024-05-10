@@ -60,12 +60,12 @@ function Player(position) {
             player.velocity.x = 0;
             player.position.x = player.help_x;
             if (controls.up.pressed) {
-                player.texture_position = Vector2D(125, 75);
+                player.texture_position = Vector2D(110, 75);
                 player.img.src = "resources/girl/girl_5.png";
                 player.velocity.y -= 0.1;
             }
             else if (controls.down.pressed) {
-                player.texture_position = Vector2D(125, 75);
+                player.texture_position = Vector2D(110, 75);
                 player.img.src = "resources/girl/girl_6.png";
                 player.velocity.y += 0.1;
             }
