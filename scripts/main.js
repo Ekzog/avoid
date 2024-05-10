@@ -24,11 +24,6 @@ function drawGameObject(gameObject) {
     gameContext.fillRect(positionOnScreen.x, positionOnScreen.y, gameObject.scale.x, gameObject.scale.y); //debug
 
     gameContext.drawImage(gameObject.img, positionOnScreen.x - gameObject.texture_position.x, positionOnScreen.y - gameObject.texture_position.y, gameObject.texture_size.x, gameObject.texture_size.y);
-    /*
-    else{
-        gameContext.drawImage(gameObject.img, positionOnScreen.x - 25, positionOnScreen.y - 25, 50, 50);
-    }
-    */
 }
 
 
@@ -42,11 +37,12 @@ function drawGameScreen() {
 window.addEventListener('load', () => {
     
 
-    map = [[1, 1, 1, 1, 1, 1, 1, 1, 1],
-           [3, 0, 0, 0, 0, 0, 0, 0, 1],
-           [3, 0, 0, 0, 0, 0, 0, 0, 1],
-           [3, 0, 0, 0, 2, 0, 4, 4, 0],
-           [3, 0, 0, 0, 0, 0, 0, 0, 0],
+    map = [[1, 3, 1, 1, 1, 1, 1, 1, 1],
+           [1, 3, 0, 0, 0, 0, 0, 0, 1],
+           [1, 3, 0, 0, 0, 0, 0, 0, 1],
+           [1, 3, 0, 0, 2, 0, 4, 4, 0],
+           [1, 3, 0, 0, 0, 0, 0, 0, 0],
+           [1, 1, 1, 1, 1, 1, 1, 0, 1],
            [1, 1, 1, 1, 1, 1, 1, 1, 1],];
     for (let i = 0; i< map.length; i +=1) {
         for (let j = 0; j< map[i].length; j +=1){
