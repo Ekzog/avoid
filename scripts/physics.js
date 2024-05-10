@@ -52,9 +52,11 @@ function updateGameObject(gameObject, deltaTime) {
         if (gameObject.velocity.y > maxFallSpeed) {
             gameObject.velocity.y = maxFallSpeed;
         }
+        
     }
     gameObject.onUpdate(deltaTime);
     gameObject.grounded = false;
+    gameObject.on_ladder = false;
     collisions(gameObject);
     
     let velocity = copyVector(gameObject.velocity);
@@ -107,6 +109,7 @@ function blockGameObject(gameObject, blocker) {
                 gameObject.velocity.y = 0;
                 gameObject.position.y = blocker.position.y - gameObject.scale.y;
                 gameObject.grounded = true;
+                gameObject.climb = false;
             }
         }
     }

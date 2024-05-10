@@ -33,29 +33,62 @@ function Player(position) {
     player.endJumpG = player.g * 2;
     player.name = "girl";
     player.layer = 2;
+    player.on_ladder = false;
+    player.climb = false;
+    player.can_up = true;
     player.texture_size = Vector2D(256, 256);
+    player.help_x = 0;
     //player.img.src = "resources/girl/girl_7.png";
     player.onUpdate = deltaTime => {
-        if (player.grounded) {
-            player.jumpTime = 0;
-            player.g = player.startJumpG;
-            //player.scale = Vector2D(80, 150);
+        if (player.on_ladder){
+            player.velocity.y = 0;
+            if(!player.climb) {
+                if (controls.up.pressed && player.can_up) {
+                    player.climb = true;
+                    //player.velocity.y -= 0.1;
+                }
+                else if (controls.down.pressed) {
+                    player.climb = true;
+                    //player.velocity.y += 0.1;
+                }
+
+            }
+            player.grounded = true;
+        }
+        if(player.climb){
+            player.can_up = true;
+            player.velocity.x = 0;
+            player.position.x = player.help_x;
+            if (controls.up.pressed) {
+                player.texture_position = Vector2D(125, 75);
+                player.img.src = "resources/girl/girl_5.png";
+                player.velocity.y -= 0.1;
+            }
+            else if (controls.down.pressed) {
+                player.texture_position = Vector2D(125, 75);
+                player.img.src = "resources/girl/girl_6.png";
+                player.velocity.y += 0.1;
+            }
+        }
+        if (!player.on_ladder) player.climb = false;
+        if (player.grounded && !player.climb) {
             player.texture_position = Vector2D(125, 75);
             player.img.src = "resources/girl/girl_7.png";
         }
         player.velocity.x = 0;
-        if (controls.left.pressed) {
+        if (controls.left.pressed && !player.climb) {
             player.texture_position = Vector2D(150, 70);
             player.img.src = "resources/girl/girl_9.png";
            
             player.velocity.x -= player.walkSpeed;
         }
-        if (controls.right.pressed) {
+        if (controls.right.pressed && !player.climb) {
             //player.scale = Vector2D(100, 150);
             player.texture_position = Vector2D(150, 70);
             player.img.src = "resources/girl/girl_9.png";
             player.velocity.x += player.walkSpeed;
         }
+        /*
         if (controls.up.pressed && player.jumpTime < player.maxJumpTime) {
             if (player.grounded) {
                 player.velocity.y = -player.jumpSpeed;
@@ -65,11 +98,22 @@ function Player(position) {
             player.jumpTime = player.maxJumpTime;
             player.g = player.endJumpG;
         }
+        */
+        //console.log(player.position.x, ' ', player.position.y);
     };
 
     player.onCollision = other => {
         if (other.damage) {
             player.destroy = true;
+        }
+
+        if (other.name == "ladder" || other.name == "end_ladder") {
+            player.on_ladder = true;
+            player.help_x = other.position.x + 25;
+        }
+
+        if (other.name == "end_ladder") {
+            player.can_up = false;
         }
     };
 
@@ -95,7 +139,19 @@ function Ladder(position, scale) {
     let block = GameObject(position, scale, "black");
     block.texture_size = Vector2D(100, 100);
     block.texture_position = Vector2D(0, 0);
+    block.name = "ladder";
     block.img.src = "resources/blocks/ladder.png";
+    block.g = 0;
+    block.solid = false;
+    return block;
+}
+
+function End_Ladder(position, scale) {
+    let block = GameObject(position, scale, "black");
+    block.texture_size = Vector2D(100, 100);
+    block.texture_position = Vector2D(0, -10);
+    block.name = "end_ladder";
+    block.img.src = "resources/blocks/floor_with_ladder_branch.png";
     block.g = 0;
     block.solid = false;
     return block;
@@ -117,7 +173,7 @@ function Camera() {
 
 function Enemy(position) {
     let enemy = GameObject(position, Vector2D(50,50),"red");
-    enemy.damage = true;
+    //enemy.damage = true;
     enemy.walkSpeed = 0.05;
     enemy.maxWalkTime = 1000;
     enemy.layer = 2;

@@ -37,11 +37,11 @@ function drawGameScreen() {
 window.addEventListener('load', () => {
     
 
-    map = [[1, 3, 2, 1, 1, 1, 1, 1, 1],
-           [1, 3, 1, 1, 1, 1, 1, 1, 1],
+    map = [[0, 0, 0, 1, 1, 1, 1, 1, 1],
+           [1, 4, 1, 1, 1, 1, 1, 1, 1],
            [1, 3, 0, 0, 0, 0, 0, 0, 1],
-           [1, 3, 0, 0, 0, 0, 4, 4, 0],
-           [1, 3, 0, 0, 0, 0, 0, 0, 0],
+           [1, 3, 0, 0, 0, 0, 5, 5, 0],
+           [1, 3, 2, 0, 0, 0, 0, 0, 0],
            [1, 1, 1, 1, 1, 1, 1, 0, 1],
            [1, 1, 1, 1, 1, 1, 1, 1, 1],];
     for (let i = 0; i< map.length; i +=1) {
@@ -49,7 +49,8 @@ window.addEventListener('load', () => {
             if (map[i][j] == 1)  Branch(Vector2D(j * 100, i * 100), Vector2D(100, 100));
             if (map[i][j] == 2)  player = Player(Vector2D(j * 100, i * 100));
             if (map[i][j] == 3)  Ladder(Vector2D(j * 100, i * 100), Vector2D(100, 100));
-            if (map[i][j] == 4)  Enemy(Vector2D(j * 100, i * 100));
+            if (map[i][j] == 4)  End_Ladder(Vector2D(j * 100, i * 100-10), Vector2D(100, 100));
+            if (map[i][j] == 5)  Enemy(Vector2D(j * 100, i * 100));
         }
     }
     camera = Camera();
