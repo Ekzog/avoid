@@ -10,6 +10,7 @@ function GameObject(position, scale, color) {
         velocity: Vector2D(0, 0),
         scale: scale,
         color: color,
+        layer: 0,
         solid: true,
         img: new Image(),
         onUpdate: deltaTime => { },
@@ -23,7 +24,7 @@ function GameObject(position, scale, color) {
 }
 
 function Player(position) {
-    let player = GameObject(position, Vector2D(100, 150), "blue");
+    let player = GameObject(position, Vector2D(50, 150), "blue");
     player.walkSpeed = 0.1;
     player.jumpSpeed = 1.2;
     player.maxJumpTime = 1000;
@@ -31,6 +32,7 @@ function Player(position) {
     player.startJumpG = player.g;
     player.endJumpG = player.g * 2;
     player.name = "girl";
+    player.layer = 2;
     player.texture_size = Vector2D(256, 256);
     //player.img.src = "resources/girl/girl_7.png";
     player.onUpdate = deltaTime => {
@@ -38,19 +40,19 @@ function Player(position) {
             player.jumpTime = 0;
             player.g = player.startJumpG;
             //player.scale = Vector2D(80, 150);
-            player.texture_position = Vector2D(75, 70);
+            player.texture_position = Vector2D(125, 75);
             player.img.src = "resources/girl/girl_7.png";
         }
         player.velocity.x = 0;
         if (controls.left.pressed) {
-            player.texture_position = Vector2D(100, 60);
+            player.texture_position = Vector2D(150, 70);
             player.img.src = "resources/girl/girl_9.png";
            
             player.velocity.x -= player.walkSpeed;
         }
         if (controls.right.pressed) {
             //player.scale = Vector2D(100, 150);
-            player.texture_position = Vector2D(100, 60);
+            player.texture_position = Vector2D(150, 70);
             player.img.src = "resources/girl/girl_9.png";
             player.velocity.x += player.walkSpeed;
         }
@@ -80,12 +82,22 @@ function Block(position, scale) {
     return block;
 }
 
-function Balka(position, scale) {
-    let block = GameObject(position, scale, "red");
+function Branch(position, scale) {
+    let block = GameObject(position, scale, "black");
     block.texture_size = Vector2D(100, 100);
     block.texture_position = Vector2D(0, 0);
-    block.img.src = "resources/metal_branch.png";
+    block.img.src = "resources/blocks/metal_branch.png";
     block.g = 0;
+    return block;
+}
+
+function Ladder(position, scale) {
+    let block = GameObject(position, scale, "black");
+    block.texture_size = Vector2D(100, 100);
+    block.texture_position = Vector2D(0, 0);
+    block.img.src = "resources/blocks/ladder.png";
+    block.g = 0;
+    block.solid = false;
     return block;
 }
 
@@ -108,6 +120,7 @@ function Enemy(position) {
     enemy.damage = true;
     enemy.walkSpeed = 0.05;
     enemy.maxWalkTime = 1000;
+    enemy.layer = 2;
     enemy.time = 0;
 
     enemy.onUpdate = deltaTime => {
