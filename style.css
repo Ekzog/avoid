@@ -1,9 +1,101 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center, dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+
 body {
+    background-color: #1d1c29;
     overflow: hidden;
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-items: center;
+
+}
+
+.name_container{
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-items: center;
+}
+
+.logo_img{
+    width: 160px;
+    height: 160px;
+}
+
+.logo_text{
+    color: whitesmoke;
+    margin-top: 0;
+    font-size: 56px;
+}
+
+
+
+
+.control_container{
+    margin-top: 10px;
+    margin-bottom: 30px;
+    padding-left: 30px;
+    padding-right: 30px;
+
+    background-color: rgba(0, 0, 0, 0.332);
+
+
+    width: 100%;
+    max-width: 810px;
+    min-width: 700px;
+    height: 120px;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-items: center;
+}
+
+.control_elem{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-items: center;
+    align-items: center;
+}
+
+.control_text{
+    margin-left: 20px;
+    color: whitesmoke;
+}
+
+.control_text_mouse{
+    margin-left: 0;
+    color: whitesmoke;
+}
+
+
+
+
+
+.game_container{
+    max-width: 960px;
+    min-width: 700px;
+    height: 100%;
 }
 
 #game-canvas {
-    position: absolute;
+    height: 100%;
+    width: 100%;
     top: 0px;
     left: 0px;
     background-color: darkslateblue;

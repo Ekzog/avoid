@@ -8,7 +8,36 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <canvas id = "game-canvas"></canvas>
+    <div class="name_container">
+        <!-- <img src="resources/web_resources/game_logo.png" class="logo_img"> -->
+        <h1 class="logo_text">Avoid</h1>
+    </div>
+
+    <div class="control_container">
+        <div class="control_elem">
+            <img src="resources/web_resources/wasd.png">
+            <p class="control_text"> - Управление передвижением</p>
+        </div>
+        <div class="control_elem">
+            <img src="resources/web_resources/wasd-2.png">
+            <p class="control_text"> - Карабкаться по лестнице</p>
+        </div>
+        <div class="control_elem">
+            <img src="resources/web_resources/wasd-3.png">
+            <p class="control_text"> - Открыть зонт</p>
+        </div>
+    </div>
+
+    <main>
+        <div class="game_container">
+            <canvas id = "game-canvas"></canvas>
+        </div>
+    </main>
+
+    <footer>
+
+    </footer>
+    
 
     <script src = "scripts/main.js"></script>
     <script src = "scripts/physics.js"></script>

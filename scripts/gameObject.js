@@ -80,12 +80,15 @@ function Player(position) {
         if (player.grounded && !player.climb) {
             player.texture_position = Vector2D(125, 75);
             if(player.right) player.img.src = "resources/girl/girl_stand_right_1.png";
-            else player.img.src = "resources/girl/girl_stand_left_1.png";
+            else {
+                player.texture_position = Vector2D(85, 75);
+                player.img.src = "resources/girl/girl_stand_left_1.png";
+            }
         }
         player.velocity.x = 0;
         if (controls.left.pressed && !player.climb) {
             player.right = false;
-            player.texture_position = Vector2D(150, 70);
+            player.texture_position = Vector2D(58, 70);
             player.img.src = "resources/girl/girl_run_left_1.png";
            
             player.velocity.x -= player.walkSpeed;
@@ -111,11 +114,11 @@ function Player(position) {
                 player.g = 0.0001;
             }
             if(player.right){
-                player.texture_position = Vector2D(150, 70);
+                player.texture_position = Vector2D(100, 70);
                 player.img.src = "resources/girl/girl_fly_down_right_1.png";
             }
             else{
-                player.texture_position = Vector2D(150, 70);
+                player.texture_position = Vector2D(105, 70);
                 player.img.src = "resources/girl/girl_fly_down_left_1.png";
             }
             console.log("Нажата кнопка зонтика");
@@ -218,6 +221,30 @@ function Earth_top(position, scale) {
     block.g = 0;
     return block;
 }
+
+function Ladder_earth(position, scale) {
+    let block = GameObject(position, scale, "black");
+    block.texture_size = Vector2D(100, 100);
+    block.texture_position = Vector2D(0, 0);
+    block.name = "ladder";
+    block.img.src = "resources/blocks/ladder_earth.png";
+    block.g = 0;
+    block.solid = false;
+    return block;
+}
+
+function End_Ladder_earth(position, scale) {
+    let block = GameObject(position, scale, "black");
+    block.texture_size = Vector2D(100, 100);
+    block.texture_position = Vector2D(0, -10);
+    block.name = "end_ladder";
+    block.img.src = "resources/blocks/floor_with_ladder_earth.png";
+    block.g = 0;
+    block.solid = false;
+    return block;
+}
+
+
 
 function Ladder(position, scale) {
     let block = GameObject(position, scale, "black");
