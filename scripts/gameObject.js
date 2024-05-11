@@ -25,8 +25,8 @@ function GameObject(position, scale, color) {
 
 function Player(position) {
     let player = GameObject(position, Vector2D(50, 150), "blue");
-    player.walkSpeed = 0.1;
-    player.jumpSpeed = 1.2;
+    player.walkSpeed = 2.2;
+    player.jumpSpeed = 2.2;
     player.maxJumpTime = 1000;
     player.jumpTime = 0;
     player.startJumpG = player.g;
@@ -64,12 +64,12 @@ function Player(position) {
             if (controls.up.pressed) {
                 player.texture_position = Vector2D(110, 75);
                 player.img.src = "resources/girl/girl_5.png";
-                player.velocity.y -= 0.1;
+                player.velocity.y -= 0.9;
             }
             else if (controls.down.pressed) {
                 player.texture_position = Vector2D(110, 75);
                 player.img.src = "resources/girl/girl_6.png";
-                player.velocity.y += 0.1;
+                player.velocity.y += 0.9;
             }
         }
         if (!player.on_ladder) {
@@ -154,6 +154,58 @@ function Branch(position, scale) {
     block.g = 0;
     return block;
 }
+
+// Здесь элементы которые добавил Влад //
+
+function Earth(position, scale) {
+    let block = GameObject(position, scale, "black");
+    block.texture_size = Vector2D(100, 100);
+    block.texture_position = Vector2D(0, 0);
+    block.img.src = "resources/blocks/background_1.png";
+    block.g = 0;
+    return block;
+}
+
+function Earth_floor(position, scale) {
+    let block = GameObject(position, scale, "black");
+    block.texture_size = Vector2D(100, 100);
+    block.texture_position = Vector2D(0, 0);
+    block.img.src = "resources/blocks/floor_1.png";
+    block.g = 0;
+    return block;
+}
+
+function Earth_left(position, scale) {
+    let block = GameObject(position, scale, "black");
+    block.texture_size = Vector2D(100, 100);
+    block.texture_position = Vector2D(0, 0);
+    block.img.src = "resources/blocks/floor_1_left.png";
+    block.g = 0;
+    return block;
+}
+
+function Earth_right(position, scale) {
+    let block = GameObject(position, scale, "black");
+    block.texture_size = Vector2D(100, 100);
+    block.texture_position = Vector2D(0, 0);
+    block.img.src = "resources/blocks/floor_1_right.png";
+    block.g = 0;
+    return block;
+}
+
+function Earth_top(position, scale) {
+    let block = GameObject(position, scale, "black");
+    block.texture_size = Vector2D(100, 100);
+    block.texture_position = Vector2D(0, 0);
+    block.img.src = "resources/blocks/floor_1_top.png";
+    block.g = 0;
+    return block;
+}
+
+
+
+
+
 
 function Ladder(position, scale) {
     let block = GameObject(position, scale, "black");

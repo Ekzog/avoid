@@ -53,6 +53,14 @@ window.addEventListener('load', () => {
             if(JSON.stringify(pixel) == JSON.stringify([0, 255, 255])) End_Ladder(Vector2D(j * 100, i * 100-10), Vector2D(100, 100));
             if(JSON.stringify(pixel) == JSON.stringify([255, 0, 0])) Enemy(Vector2D(j * 100, i * 100), Vector2D(100, 100));
             if(JSON.stringify(pixel) == JSON.stringify([255, 255, 0])) Wind(Vector2D(j * 100, i * 100), Vector2D(100, 100));
+
+            // Здесь элементы которые добавил Влад //
+
+            if(JSON.stringify(pixel) == JSON.stringify([150, 100, 70])) Earth(Vector2D(j * 100, i * 100), Vector2D(100, 100));
+            if(JSON.stringify(pixel) == JSON.stringify([80, 50, 30])) Earth_floor(Vector2D(j * 100, i * 100), Vector2D(100, 100));
+            if(JSON.stringify(pixel) == JSON.stringify([60, 40, 20])) Earth_left(Vector2D(j * 100, i * 100), Vector2D(100, 100));
+            if(JSON.stringify(pixel) == JSON.stringify([40, 20, 10])) Earth_right(Vector2D(j * 100, i * 100), Vector2D(100, 100));
+            if(JSON.stringify(pixel) == JSON.stringify([20, 10, 5])) Earth_top(Vector2D(j * 100, i * 100), Vector2D(100, 100));
         }
     }
     
