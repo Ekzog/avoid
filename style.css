@@ -98,5 +98,5 @@ body {
     width: 100%;
     top: 0px;
     left: 0px;
-    background-color: darkslateblue;
+    background-image: url("resources/objects/background.png");
 }
