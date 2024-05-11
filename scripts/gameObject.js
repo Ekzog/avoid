@@ -73,19 +73,19 @@ function Player(position) {
         if (!player.on_ladder) player.climb = false;
         if (player.grounded && !player.climb) {
             player.texture_position = Vector2D(125, 75);
-            player.img.src = "resources/girl/girl_stand_left_1.png";
+            player.img.src = "resources/girl/girl_stand_right_1.png";
         }
         player.velocity.x = 0;
         if (controls.left.pressed && !player.climb) {
             player.texture_position = Vector2D(150, 70);
-            player.img.src = "resources/girl/girl_run_left_1.png";
+            player.img.src = "resources/girl/girl_run_right_1.png";
            
             player.velocity.x -= player.walkSpeed;
         }
         if (controls.right.pressed && !player.climb) {
             //player.scale = Vector2D(100, 150);
             player.texture_position = Vector2D(150, 70);
-            player.img.src = "resources/girl/girl_run_left_1.png";
+            player.img.src = "resources/girl/girl_run_right_1.png";
             player.velocity.x += player.walkSpeed;
         }
         /*
