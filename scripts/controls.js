@@ -2,7 +2,8 @@ var controls = {
     up: Key("W", 87),
     down: Key("S", 83),
     left: Key("A", 65),
-    right: Key("D", 68)
+    right: Key("D", 68),
+    umbrella: Key("E", 69)
 };
 
 function Key(key, keyCode) {
@@ -26,6 +27,9 @@ function changeKeyPressed(event, pressed) {
             break;
         case controls.right.keyCode:
             controls.right.pressed = pressed;
+            break;
+        case controls.umbrella.keyCode:
+            controls.umbrella.pressed = pressed;
             break;
     }
 }

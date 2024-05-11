@@ -57,6 +57,7 @@ function updateGameObject(gameObject, deltaTime) {
     gameObject.onUpdate(deltaTime);
     gameObject.grounded = false;
     gameObject.on_ladder = false;
+    gameObject.fly = false;
     collisions(gameObject);
     
     let velocity = copyVector(gameObject.velocity);
@@ -66,7 +67,7 @@ function updateGameObject(gameObject, deltaTime) {
 
 function updateGameObjects(deltaTime) {
     gameObjects.forEach(gameObject => {
-        updateGameObject(gameObject, deltaTime);
+        if(gameObject.name == "enemy" || gameObject.name == "girl" || gameObject.name == "camera") updateGameObject(gameObject, deltaTime);
     });
 }
 
