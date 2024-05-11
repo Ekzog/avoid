@@ -177,6 +177,15 @@ function Branch(position, scale) {
 
 // Здесь элементы которые добавил Влад //
 
+function Propeller(position, scale) {
+    let block = GameObject(position, scale, "black");
+    block.texture_size = Vector2D(100, 100);
+    block.texture_position = Vector2D(0, 0);
+    block.img.src = "resources/objects/fan_block.png";
+    block.g = 0;
+    return block;
+}
+
 function Earth(position, scale) {
     let block = GameObject(position, scale, "black");
     block.texture_size = Vector2D(100, 100);
