@@ -83,6 +83,10 @@ window.addEventListener('load', () => {
             if(JSON.stringify(pixel) == JSON.stringify([60, 40, 20])) Earth_left(Vector2D(j * 100, i * 100), Vector2D(100, 100));
             if(JSON.stringify(pixel) == JSON.stringify([40, 20, 10])) Earth_right(Vector2D(j * 100, i * 100), Vector2D(100, 100));
             if(JSON.stringify(pixel) == JSON.stringify([20, 10, 5])) Earth_top(Vector2D(j * 100, i * 100), Vector2D(100, 100));
+
+            if(JSON.stringify(pixel) == JSON.stringify([200, 0, 200])) Ladder_earth(Vector2D(j * 100, i * 100), Vector2D(100, 100));
+            if(JSON.stringify(pixel) == JSON.stringify([0, 200, 200])) End_Ladder_earth(Vector2D(j * 100, i * 100-10), Vector2D(100, 100));
+            if(JSON.stringify(pixel) == JSON.stringify([150, 220, 220])) Propeller(Vector2D(j * 100, i * 100), Vector2D(100, 100));
         }
     }
     
