@@ -287,10 +287,11 @@ function End_Ladder(position, scale) {
 }
 
 function Wind(position, scale) {
-    let block = GameObject(position, scale, "yellow");
+    let block = GameObject(position, scale);
     block.texture_size = Vector2D(100, 100);
     block.texture_position = Vector2D(0, -10);
     block.name = "wind";
+    block.img.src = "resources/objects/wind.png";
     //block.img.src = "resources/blocks/floor_with_ladder_branch.png";
     block.g = 0;
     block.solid = false;
