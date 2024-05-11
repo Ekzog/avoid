@@ -44,12 +44,12 @@ window.addEventListener('load', () => {
     var pixelData = canvas.getContext('2d').getImageData(0, 0, img_map.width, img_map.height).data;
     var map = new Array(img_map.height);
     map = [1];
-    /*s
+    
     for(let i = 0; i< img_map.height; i+=1){
         map[i] = new Array(img_map.width);
         for(let j = 0; j< img_map.width; j+=1){
             var pixel = [pixelData[j * 4 + 0 + (img_map.width * 4 * i)], pixelData[j * 4 + 1 + (img_map.width * 4 * i)], pixelData[j * 4 + 2 + (img_map.width * 4 * i)]];
-            map[i][j] = 1;
+            //map[i][j] = 1;
             console.log(pixel);
             if(JSON.stringify(pixel) == JSON.stringify([0, 0, 0])) map[i-1][j] = 1;
             if(JSON.stringify(pixel) == JSON.stringify([255, 0, 255])) map[i-1][j] = 1;
@@ -60,12 +60,12 @@ window.addEventListener('load', () => {
     for(let i = 0; i< map.length; i+=1){
         for(let j = 0; j< map[i].length; j+=1){
             if(map[i][j] == 1){
-                //Way(Vector2D(j * 100, i * 100), Vector2D(100, 100));
+                Way(Vector2D(j * 100, i * 100), Vector2D(100, 100));
                 console.log('Поставил');
             } 
         }
     }
-    */
+    
     for(let i = 0; i< img_map.height; i+=1){
         for(let j = 0; j< img_map.width; j+=1){
             var pixel = [pixelData[j * 4 + 0 + (img_map.width * 4 * i)], pixelData[j * 4 + 1 + (img_map.width * 4 * i)], pixelData[j * 4 + 2 + (img_map.width * 4 * i)]];

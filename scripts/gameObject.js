@@ -116,7 +116,7 @@ function Player(position) {
         }
         */
         //ddddconsole.log(player.position.x, ' ', player.position.y);
-        console.log('Персонажа',player.position.x, ' ', player.position.y);
+        //console.log('Персонажа',player.position.x, ' ', player.position.y);
     };
 
     player.onCollision = other => {
@@ -229,7 +229,7 @@ function Enemy(position, map) {
             enemy.time = 0;
             enemy.walkSpeed *= -1;
         }
-        console.log('Врага',enemy.position.x, ' ', enemy.position.y);
+        //console.log('Врага',enemy.position.x, ' ', enemy.position.y);
     }
     return enemy;
 }

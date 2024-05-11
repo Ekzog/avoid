@@ -67,7 +67,6 @@ function updateGameObject(gameObject, deltaTime) {
 
 function updateGameObjects(deltaTime) {
     gameObjects.forEach(gameObject => {
-        
         if(gameObject.name == "enemy" || gameObject.name == "girl" || gameObject.name == "camera") updateGameObject(gameObject, deltaTime);
     });
 }
