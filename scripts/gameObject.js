@@ -37,6 +37,7 @@ function Player(position) {
     player.climb = false;
     player.can_up = true;
     player.fly = false;
+    player.right = true;
     player.texture_size = Vector2D(256, 256);
     player.help_x = 0;
     //player.img.src = "resources/girl/girl_7.png";
@@ -63,12 +64,12 @@ function Player(position) {
             player.position.x = player.help_x;
             if (controls.up.pressed) {
                 player.texture_position = Vector2D(110, 75);
-                player.img.src = "resources/girl/girl_5.png";
+                player.img.src = "resources/girl/girl_climb_1.png";
                 player.velocity.y -= player.walkSpeed;
             }
             else if (controls.down.pressed) {
                 player.texture_position = Vector2D(110, 75);
-                player.img.src = "resources/girl/girl_6.png";
+                player.img.src = "resources/girl/girl_climb_2.png";
                 player.velocity.y += player.walkSpeed;
             }
         }
@@ -78,24 +79,35 @@ function Player(position) {
         }
         if (player.grounded && !player.climb) {
             player.texture_position = Vector2D(125, 75);
-            player.img.src = "resources/girl/girl_7.png";
+            if(player.right) player.img.src = "resources/girl/girl_stand_right_1.png";
+            else player.img.src = "resources/girl/girl_stand_left_1.png";
         }
         player.velocity.x = 0;
         if (controls.left.pressed && !player.climb) {
+            player.right = false;
             player.texture_position = Vector2D(150, 70);
-            player.img.src = "resources/girl/girl_9.png";
+            player.img.src = "resources/girl/girl_run_left_1.png";
            
             player.velocity.x -= player.walkSpeed;
         }
         if (controls.right.pressed && !player.climb) {
+            player.right = true;
             //player.scale = Vector2D(100, 150);
             player.texture_position = Vector2D(150, 70);
-            player.img.src = "resources/girl/girl_9.png";
+            player.img.src = "resources/girl/girl_run_right_1.png";
             player.velocity.x += player.walkSpeed;
         }
         if (controls.umbrella.pressed && !player.on_ladder  && !player.climb){
-            player.texture_position = Vector2D(150, 70);
-            player.img.src = "resources/girl/girl_3.png";
+            if(controls.right.pressed){
+                player.right = true;
+                player.texture_position = Vector2D(150, 70);
+                player.img.src = "resources/girl/girl_fly_down_right_1.png";
+            }
+            if(controls.left.pressed){
+                player.right = false;
+                player.texture_position = Vector2D(150, 70);
+                player.img.src = "resources/girl/girl_fly_down_left_1.png";
+            }
             player.velocity.y = 0.1;
             player.g = 0;
             if(player.fly){
@@ -152,6 +164,53 @@ function Branch(position, scale) {
     block.texture_size = Vector2D(100, 100);
     block.texture_position = Vector2D(0, 0);
     block.img.src = "resources/blocks/metal_branch.png";
+    block.g = 0;
+    return block;
+}
+
+// Здесь элементы которые добавил Влад //
+
+function Earth(position, scale) {
+    let block = GameObject(position, scale, "black");
+    block.texture_size = Vector2D(100, 100);
+    block.texture_position = Vector2D(0, 0);
+    block.img.src = "resources/blocks/background_1.png";
+    block.g = 0;
+    return block;
+}
+
+function Earth_floor(position, scale) {
+    let block = GameObject(position, scale, "black");
+    block.texture_size = Vector2D(100, 100);
+    block.texture_position = Vector2D(0, 0);
+    block.img.src = "resources/blocks/floor_1.png";
+    block.g = 0;
+    return block;
+}
+
+function Earth_left(position, scale) {
+    let block = GameObject(position, scale, "black");
+    block.texture_size = Vector2D(100, 100);
+    block.texture_position = Vector2D(0, 0);
+    block.img.src = "resources/blocks/floor_1_left.png";
+    block.g = 0;
+    return block;
+}
+
+function Earth_right(position, scale) {
+    let block = GameObject(position, scale, "black");
+    block.texture_size = Vector2D(100, 100);
+    block.texture_position = Vector2D(0, 0);
+    block.img.src = "resources/blocks/floor_1_right.png";
+    block.g = 0;
+    return block;
+}
+
+function Earth_top(position, scale) {
+    let block = GameObject(position, scale, "black");
+    block.texture_size = Vector2D(100, 100);
+    block.texture_position = Vector2D(0, 0);
+    block.img.src = "resources/blocks/floor_1_top.png";
     block.g = 0;
     return block;
 }
