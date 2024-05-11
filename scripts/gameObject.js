@@ -36,10 +36,12 @@ function Player(position) {
     player.on_ladder = false;
     player.climb = false;
     player.can_up = true;
+    player.fly = false;
     player.texture_size = Vector2D(256, 256);
     player.help_x = 0;
     //player.img.src = "resources/girl/girl_7.png";
     player.onUpdate = deltaTime => {
+        player.g = 0.004;
         if (player.on_ladder){
             player.velocity.y = 0;
             if(!player.climb) {
@@ -47,7 +49,7 @@ function Player(position) {
                     player.climb = true;
                     //player.velocity.y -= 0.1;
                 }
-                else if (controls.down.pressed) {
+                if (controls.down.pressed) {
                     player.climb = true;
                     //player.velocity.y += 0.1;
                 }
@@ -70,7 +72,10 @@ function Player(position) {
                 player.velocity.y += 0.1;
             }
         }
-        if (!player.on_ladder) player.climb = false;
+        if (!player.on_ladder) {
+            player.can_up = true;
+            player.climb = false;
+        }
         if (player.grounded && !player.climb) {
             player.texture_position = Vector2D(125, 75);
             player.img.src = "resources/girl/girl_7.png";
@@ -88,6 +93,17 @@ function Player(position) {
             player.img.src = "resources/girl/girl_9.png";
             player.velocity.x += player.walkSpeed;
         }
+        if (controls.umbrella.pressed && !player.on_ladder  && !player.climb){
+            player.texture_position = Vector2D(150, 70);
+            player.img.src = "resources/girl/girl_3.png";
+            player.velocity.y = 0.1;
+            player.g = 0;
+            if(player.fly){
+                player.velocity.y -= 0.4;
+                player.g = 0.0001;
+            }
+            console.log("Нажата кнопка зонтика");
+        }
         /*
         if (controls.up.pressed && player.jumpTime < player.maxJumpTime) {
             if (player.grounded) {
@@ -99,7 +115,7 @@ function Player(position) {
             player.g = player.endJumpG;
         }
         */
-        //console.log(player.position.x, ' ', player.position.y);
+        console.log(player.on_ladder, ' ', player.can_up);
     };
 
     player.onCollision = other => {
@@ -114,6 +130,10 @@ function Player(position) {
 
         if (other.name == "end_ladder") {
             player.can_up = false;
+        }
+
+        if (other.name == "wind") {
+            player.fly = true;
         }
     };
 
@@ -152,6 +172,17 @@ function End_Ladder(position, scale) {
     block.texture_position = Vector2D(0, -10);
     block.name = "end_ladder";
     block.img.src = "resources/blocks/floor_with_ladder_branch.png";
+    block.g = 0;
+    block.solid = false;
+    return block;
+}
+
+function Wind(position, scale) {
+    let block = GameObject(position, scale, "yellow");
+    block.texture_size = Vector2D(100, 100);
+    block.texture_position = Vector2D(0, -10);
+    block.name = "wind";
+    //block.img.src = "resources/blocks/floor_with_ladder_branch.png";
     block.g = 0;
     block.solid = false;
     return block;

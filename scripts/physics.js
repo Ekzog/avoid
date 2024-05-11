@@ -57,6 +57,7 @@ function updateGameObject(gameObject, deltaTime) {
     gameObject.onUpdate(deltaTime);
     gameObject.grounded = false;
     gameObject.on_ladder = false;
+    gameObject.fly = false;
     collisions(gameObject);
     
     let velocity = copyVector(gameObject.velocity);
