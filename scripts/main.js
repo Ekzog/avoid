@@ -42,16 +42,38 @@ window.addEventListener('load', () => {
     canvas.height = img_map.height;
     canvas.getContext('2d').drawImage(img_map, 0, 0, img_map.width, img_map.height);
     var pixelData = canvas.getContext('2d').getImageData(0, 0, img_map.width, img_map.height).data;
-    
-    for(let i = 0; i< img_map.width; i+=1){
-        for(let j = 0; j< img_map.height; j+=1){
-            var pixel = [pixelData[j * 4 + 0 + (img_map.height * 4 * i)], pixelData[j * 4 + 1 + (img_map.height * 4 * i)], pixelData[j * 4 + 2 + (img_map.height * 4 * i)]];
-            //console.log(pixel);
+    var map = new Array(img_map.height);
+    map = [1];
+    /*s
+    for(let i = 0; i< img_map.height; i+=1){
+        map[i] = new Array(img_map.width);
+        for(let j = 0; j< img_map.width; j+=1){
+            var pixel = [pixelData[j * 4 + 0 + (img_map.width * 4 * i)], pixelData[j * 4 + 1 + (img_map.width * 4 * i)], pixelData[j * 4 + 2 + (img_map.width * 4 * i)]];
+            map[i][j] = 1;
+            console.log(pixel);
+            if(JSON.stringify(pixel) == JSON.stringify([0, 0, 0])) map[i-1][j] = 1;
+            if(JSON.stringify(pixel) == JSON.stringify([255, 0, 255])) map[i-1][j] = 1;
+            if(JSON.stringify(pixel) == JSON.stringify([0, 255, 255])) map[i-1][j] = 1;
+        }
+    }
+    console.log(map);
+    for(let i = 0; i< map.length; i+=1){
+        for(let j = 0; j< map[i].length; j+=1){
+            if(map[i][j] == 1){
+                //Way(Vector2D(j * 100, i * 100), Vector2D(100, 100));
+                console.log('Поставил');
+            } 
+        }
+    }
+    */
+    for(let i = 0; i< img_map.height; i+=1){
+        for(let j = 0; j< img_map.width; j+=1){
+            var pixel = [pixelData[j * 4 + 0 + (img_map.width * 4 * i)], pixelData[j * 4 + 1 + (img_map.width * 4 * i)], pixelData[j * 4 + 2 + (img_map.width * 4 * i)]];
             if(JSON.stringify(pixel) == JSON.stringify([0, 0, 255])) player = Player(Vector2D(j * 100, i * 100));
             if(JSON.stringify(pixel) == JSON.stringify([0, 0, 0])) Branch(Vector2D(j * 100, i * 100), Vector2D(100, 100));
             if(JSON.stringify(pixel) == JSON.stringify([255, 0, 255])) Ladder(Vector2D(j * 100, i * 100), Vector2D(100, 100));
             if(JSON.stringify(pixel) == JSON.stringify([0, 255, 255])) End_Ladder(Vector2D(j * 100, i * 100-10), Vector2D(100, 100));
-            if(JSON.stringify(pixel) == JSON.stringify([255, 0, 0])) Enemy(Vector2D(j * 100, i * 100), Vector2D(100, 100));
+            if(JSON.stringify(pixel) == JSON.stringify([255, 0, 0])) Enemy(Vector2D(j * 100, i * 100), map);
             if(JSON.stringify(pixel) == JSON.stringify([255, 255, 0])) Wind(Vector2D(j * 100, i * 100), Vector2D(100, 100));
         }
     }

@@ -25,7 +25,7 @@ function GameObject(position, scale, color) {
 
 function Player(position) {
     let player = GameObject(position, Vector2D(50, 150), "blue");
-    player.walkSpeed = 0.1;
+    player.walkSpeed = 0.2;
     player.jumpSpeed = 1.2;
     player.maxJumpTime = 1000;
     player.jumpTime = 0;
@@ -64,12 +64,12 @@ function Player(position) {
             if (controls.up.pressed) {
                 player.texture_position = Vector2D(110, 75);
                 player.img.src = "resources/girl/girl_5.png";
-                player.velocity.y -= 0.1;
+                player.velocity.y -= player.walkSpeed;
             }
             else if (controls.down.pressed) {
                 player.texture_position = Vector2D(110, 75);
                 player.img.src = "resources/girl/girl_6.png";
-                player.velocity.y += 0.1;
+                player.velocity.y += player.walkSpeed;
             }
         }
         if (!player.on_ladder) {
@@ -115,7 +115,8 @@ function Player(position) {
             player.g = player.endJumpG;
         }
         */
-        console.log(player.on_ladder, ' ', player.can_up);
+        //ddddconsole.log(player.position.x, ' ', player.position.y);
+        console.log('Персонажа',player.position.x, ' ', player.position.y);
     };
 
     player.onCollision = other => {
@@ -166,6 +167,15 @@ function Ladder(position, scale) {
     return block;
 }
 
+function Way(position, scale) {
+    let block = GameObject(position, scale, "white");
+    block.texture_size = Vector2D(100, 100);
+    block.texture_position = Vector2D(0, 0);
+    block.g = 0;
+    block.solid = false;
+    return block;
+}
+
 function End_Ladder(position, scale) {
     let block = GameObject(position, scale, "black");
     block.texture_size = Vector2D(100, 100);
@@ -193,6 +203,7 @@ function Camera() {
     camera.g = 0;
     camera.solid = false;
     camera.followPresentage = 0.005;
+    camera.name = "camera";
     camera.onUpdate = deltaTime => {
         vectorMulNum(camera.velocity, 0);
         addVectors(camera.velocity, player.position);
@@ -202,13 +213,14 @@ function Camera() {
     return camera;
 }
 
-function Enemy(position) {
-    let enemy = GameObject(position, Vector2D(50,50),"red");
+function Enemy(position, map) {
+    let enemy = GameObject(position, Vector2D(100,100),"red");
     //enemy.damage = true;
     enemy.walkSpeed = 0.05;
     enemy.maxWalkTime = 1000;
     enemy.layer = 2;
     enemy.time = 0;
+    enemy.name = "enemy";
 
     enemy.onUpdate = deltaTime => {
         enemy.velocity.x = enemy.walkSpeed;
@@ -217,6 +229,7 @@ function Enemy(position) {
             enemy.time = 0;
             enemy.walkSpeed *= -1;
         }
+        console.log('Врага',enemy.position.x, ' ', enemy.position.y);
     }
     return enemy;
 }
