@@ -100,19 +100,23 @@ function Player(position) {
         if (controls.umbrella.pressed && !player.on_ladder  && !player.climb){
             if(controls.right.pressed){
                 player.right = true;
-                player.texture_position = Vector2D(150, 70);
-                player.img.src = "resources/girl/girl_fly_down_right_1.png";
             }
             if(controls.left.pressed){
                 player.right = false;
-                player.texture_position = Vector2D(150, 70);
-                player.img.src = "resources/girl/girl_fly_down_left_1.png";
             }
             player.velocity.y = 0.1;
             player.g = 0;
             if(player.fly){
                 player.velocity.y -= 0.4;
                 player.g = 0.0001;
+            }
+            if(player.right){
+                player.texture_position = Vector2D(150, 70);
+                player.img.src = "resources/girl/girl_fly_down_right_1.png";
+            }
+            else{
+                player.texture_position = Vector2D(150, 70);
+                player.img.src = "resources/girl/girl_fly_down_left_1.png";
             }
             console.log("Нажата кнопка зонтика");
         }
@@ -282,12 +286,13 @@ function Enemy(position, map) {
     enemy.name = "enemy";
 
     enemy.onUpdate = deltaTime => {
-        enemy.velocity.x = enemy.walkSpeed;
-        enemy.time += deltaTime;
-        if (enemy.time >= enemy.maxWalkTime) {
-            enemy.time = 0;
-            enemy.walkSpeed *= -1;
+        if((player.position.x - enemy.position.x) > 0){
+            enemy.velocity.x = enemy.walkSpeed;   
         }
+        if((player.position.x - enemy.position.x) < 0){
+            enemy.velocity.x = -enemy.walkSpeed;   
+        }
+        
         //console.log('Врага',enemy.position.x, ' ', enemy.position.y);
     }
     return enemy;
